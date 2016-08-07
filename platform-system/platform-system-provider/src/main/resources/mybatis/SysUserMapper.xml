@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqvoyage.platform.system.provider.mapper.SysUserMapper">
+
+    <sql id="userColumns">
+    	a.id,
+    	a.login_name,
+    	a.password,
+		a.name,
+		a.email,
+		a.phone,
+		a.mobile,
+		a.user_type,
+		a.login_ip,
+		a.login_date,
+		a.remarks,
+		a.login_flag,
+		a.create_date,
+		a.update_date
+    </sql>
+     
+	<!-- 根据编号获得用户 -->
+	<select id="get" resultType="SysUser">
+		SELECT
+			<include refid="userColumns"/>
+		FROM sys_user a
+		WHERE a.id = #{id}
+	</select>
+	 
+	<!-- 根据登录名查询用户 -->
+	<select id="getByLoginName" resultType="SysUser" parameterType="SysUser">
+		SELECT
+			<include refid="userColumns"/>
+		FROM sys_user a
+		WHERE a.login_name = #{loginName}
+	</select>
+	 
+	<!-- 分页查询用户信息 -->
+	<select id="findList" resultType="SysUser">
+		SELECT
+			<include refid="userColumns"/>
+		FROM sys_user a
+		<if test="role != null and role.id != null and role.id != ''">
+			JOIN sys_user_role ur ON ur.user_id = a.id AND ur.role_id = #{role.id}
+		</if>
+		WHERE 1 = 1
+		<!-- 如果不是超级管理员，则不显示超级管理员用户 -->
+		<if test="!currentUser.admin">
+			AND a.id != '1'
+		</if>
+		<if test="loginName != null and loginName != ''">
+			AND a.login_name like CONCAT('%', #{loginName}, '%')
+		</if>
+		<if test="name != null and name != ''">
+			AND a.name like CONCAT('%', #{name}, '%')
+		</if>
+        ORDER BY a.name
+	</select>
+
+	<!-- 查询全部用户 -->
+	<select id="findAllList" resultType="SysUser">
+		SELECT
+			<include refid="userColumns"/>
+		FROM sys_user a
+		ORDER BY a.name
+	</select>
+	 
+	<!-- 查询全部用户数目 -->
+	<select id="findAllCount" resultType="long">
+		SELECT
+			COUNT(1)
+		FROM sys_user a
+	</select>
+	 
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO sys_user(
+			id, 
+			login_name,
+			password, 
+			name,
+			email, 
+			phone, 
+			mobile, 
+			user_type, 
+			create_date,
+			update_date,
+			remarks, 
+			login_flag
+		) VALUES (
+			#{id}, 
+			#{loginName},
+			#{password}, 
+			#{name},
+			#{email}, 
+			#{phone}, 
+			#{mobile}, 
+			#{userType}, 
+			#{createDate},
+			#{updateDate},
+			#{remarks}, 
+			#{loginFlag}
+		)
+	</insert>
+	 
+	<!-- 更新用户 -->
+	<update id="update">
+		UPDATE sys_user SET 
+			login_name = #{loginName},
+			password = #{password}, 
+			name = #{name},
+			email = #{email}, 
+			phone = #{phone}, 
+			mobile = #{mobile}, 
+			user_type = #{userType}, 
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			login_flag = #{loginFlag}
+		WHERE id = #{id}
+	</update>
+	 
+	<!-- 删除用户和角色关联表数据 -->
+	<delete id="deleteUserRole">
+		DELETE FROM sys_user_role WHERE user_id = #{id}
+	</delete>
+	 
+	<!-- 插入用户和角色关联表数据 -->
+	<insert id="insertUserRole">
+		INSERT INTO sys_user_role(user_id, role_id)
+		<foreach collection="roleList" item="role" separator=" union all ">
+			SELECT #{id}, #{role.id} FROM dual
+		</foreach>
+	</insert>
+	 
+	<!-- 更新用户信息  -->
+	<update id="updateUserInfo">
+		UPDATE sys_user SET 
+			email = #{email}, 
+			phone = #{phone}, 
+			mobile = #{mobile}, 
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	 
+	<!-- 更新用户密码 -->
+	<update id="updatePasswordById">
+		UPDATE sys_user SET 
+			password = #{password} 
+		WHERE id = #{id}
+	</update>
+	 
+	<!-- 更新登录信息，如登录IP、登录时间 -->
+	<update id="updateLoginInfo">
+		UPDATE sys_user SET 
+			login_ip = #{loginIp}, 
+			login_Date = #{loginDate} 
+		WHERE id = #{id}
+	</update>
+	 
+	<!-- 删除用户 -->
+	<update id="delete">
+		DELETE FROM sys_user WHERE id = #{id}
+	</update>
+	 
+</mapper>

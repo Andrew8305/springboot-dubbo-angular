@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqvoyage.platform.system.provider.mapper.SysRoleMapper">
+     
+    <resultMap id="roleResult" type="SysRole">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="remarks" column="remarks" />
+		<result property="useable" column="useable" />
+		<result property="sysData" column="sysData" />
+		<collection property="menuList" ofType="SysMenu">
+			<id property="id" column="menuList.id" />
+		</collection>
+	</resultMap>
+	 
+    <sql id="roleColumns">
+    	a.id,
+    	a.name,
+		a.remarks,
+		a.create_date,
+		a.update_date,
+    	a.useable AS useable,
+    	a.is_sys AS sysData
+    </sql>
+     
+	<select id="get" resultMap="roleResult">
+		SELECT
+			<include refid="roleColumns"/>,
+			rm.menu_id AS "menuList.id"
+		FROM sys_role a
+		LEFT JOIN sys_role_menu rm ON rm.role_id = a.id
+		WHERE a.id = #{id}
+	</select>
+	 
+	<select id="getByName" resultType="SysRole">
+		SELECT
+			<include refid="roleColumns"/>
+		FROM sys_role a
+		WHERE a.name = #{name}
+	</select>
+
+	<select id="findList" resultMap="roleResult">
+		SELECT
+			<include refid="roleColumns"/>
+		FROM sys_role a
+		LEFT JOIN sys_user_role ur ON ur.role_id = a.id
+		LEFT JOIN sys_user u ON u.id = ur.user_id
+		WHERE a.useable=#{useable}
+		<if test="user != null and user.id != null and user.id != ''">
+			AND u.id = #{user.id}
+		</if>
+		<if test="user != null and user.loginName != null and user.loginName != ''">
+			AND u.login_name = #{user.loginName}
+		</if>
+		ORDER BY a.name
+	</select>
+	 
+	<select id="findAllList" resultType="SysRole">
+		SELECT
+			<include refid="roleColumns"/>
+		FROM sys_role a
+		ORDER BY a.name
+	</select>
+	 
+	<insert id="insert">
+		INSERT INTO sys_role(
+			id, 
+			name,
+			create_date,
+			update_date,
+			remarks, 
+			is_sys,
+			useable
+		) VALUES (
+			#{id}, 
+			#{name},
+			#{createDate},
+			#{updateDate},
+			#{remarks}, 
+			#{sysData},
+			#{useable}
+		)
+	</insert>
+	 
+	<update id="update">
+		UPDATE sys_role SET 
+			name = #{name},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			is_sys = #{sysData},
+			useable = #{useable}
+		WHERE id = #{id}
+	</update>
+	 
+	<delete id="deleteRoleMenu">
+		DELETE FROM sys_role_menu WHERE role_id = #{id}
+	</delete>
+	 
+	<insert id="insertRoleMenu">
+		INSERT INTO sys_role_menu(role_id, menu_id)
+		<foreach collection="menuList" item="menu" separator=" union all ">
+			SELECT #{id}, #{menu.id} FROM dual
+		</foreach>
+	</insert>
+
+	<update id="delete">
+		DELETE FROM sys_role WHERE id = #{id}
+	</update>
+	 
+</mapper>

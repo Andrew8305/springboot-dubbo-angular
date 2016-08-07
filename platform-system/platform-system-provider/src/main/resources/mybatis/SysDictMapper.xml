@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqvoyage.platform.system.provider.mapper.SysDictMapper">
+     
+	<select id="get" resultType="SysDict">
+		SELECT 
+			* 
+		FROM sys_dict 
+		WHERE id = #{id}
+	</select>
+	 
+	<select id="findList" resultType="SysDict">
+		SELECT 
+			* 
+		FROM sys_dict 
+		WHERE 1 = 1
+		<if test="type != null and type != ''">
+			AND type = #{type}
+		</if>
+		<if test="description != null and description != ''">
+			AND description LIKE CONCAT('%', #{description}, '%')
+		</if>
+		ORDER BY type, sort, update_date DESC
+	</select>
+	 
+	<select id="findAllList" resultType="SysDict">
+		SELECT 
+			* 
+		FROM sys_dict 
+		ORDER BY type, sort, update_date DESC
+	</select>
+	 
+	<select id="findTypeList" resultType="string">
+		SELECT 
+			type 
+		FROM sys_dict 
+		GROUP BY type
+		ORDER BY type
+	</select>
+	 
+	<insert id="insert">
+		INSERT INTO sys_dict(
+			id, 
+			value, 
+			label, 
+			type, 
+			description, 
+			sort, 
+			create_date,
+			update_date,
+			remarks
+		) VALUES (
+			#{id}, 
+			#{value}, 
+			#{label}, 
+			#{type}, 
+			#{description}, 
+			#{sort}, 
+			#{createDate},
+			#{updateDate},
+			#{remarks}
+		)
+	</insert>
+	 
+	<update id="update">
+		UPDATE sys_dict SET 
+			value = #{value}, 
+			label = #{label}, 
+			type = #{type}, 
+			description = #{description}, 
+			sort = #{sort}, 
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	 
+	<update id="delete">
+		DELETE FROM sys_dict WHERE id = #{id}
+	</update>
+	 
+</mapper>

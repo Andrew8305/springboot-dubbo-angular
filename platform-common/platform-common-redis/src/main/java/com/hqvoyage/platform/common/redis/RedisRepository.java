@@ -26,6 +26,26 @@ public class RedisRepository {
 
     private Logger logger = LoggerFactory.getLogger(RedisRepository.class);
 
+    /**
+     * 添加到带有 过期时间的  缓存
+     *
+     * @param key   redis主键
+     * @param value 值
+     * @param time  过期时间
+     * @throws Exception
+     */
+    public void setExpire(final byte[] key, final byte[] value, final long time) throws Exception {
+        if (redisTemplate != null) {
+            redisTemplate.execute((RedisCallback<Long>) connection -> {
+                connection.set(key, value);
+                connection.expire(key, time);
+                logger.info("[redisTemplate redis]放入 缓存  url:{} ========缓存时间为{}秒", key, time);
+                return 1L;
+            });
+        } else {
+            logger.info("[redisTemplate is null]");
+        }
+    }
 
     /**
      * 添加到带有 过期时间的  缓存
@@ -155,6 +175,24 @@ public class RedisRepository {
     /**
      * 根据key获取对象
      */
+    public byte[] get(final byte[] key) throws Exception {
+        byte[] result = null;
+        if (redisTemplate != null) {
+            result = redisTemplate.execute((RedisCallback<byte[]>) connection -> {
+                byte[] values = connection.get(key);
+                if (values == null) {
+                    return null;
+                }
+                return values;
+            });
+        }
+        logger.info("[redisTemplate redis]取出 缓存  url:{} ", key);
+        return result;
+    }
+
+    /**
+     * 根据key获取对象
+     */
     public String get(final String key) throws Exception {
         String resultStr = null;
         if (redisTemplate != null) {
@@ -192,7 +230,7 @@ public class RedisRepository {
         });
     }
 
-    public HashOperations<String, Object, Object> opsForHash() {
+    public HashOperations<String, String, String> opsForHash() {
         return redisTemplate.opsForHash();
     }
 
@@ -207,7 +245,7 @@ public class RedisRepository {
     /**
      * 获取单个field对应的值
      */
-    public Object getHashValues(String key, Object hashKey) {
+    public Object getHashValues(String key, String hashKey) {
         logger.info("[redisTemplate redis]  getHashValues()  key={},hashKey={}", key, hashKey);
         return opsForHash().get(key, hashKey);
     }
@@ -223,7 +261,7 @@ public class RedisRepository {
     /**
      * key只匹配map
      */
-    public Map<Object, Object> getHashValue(String key) {
+    public Map<String, String> getHashValue(String key) {
         logger.info("[redisTemplate redis]  getHashValue()  key={}", key);
         return opsForHash().entries(key);
     }
@@ -231,7 +269,7 @@ public class RedisRepository {
     /**
      * 批量添加
      */
-    public void putHashvalues(String key, Map<String, Object> map) {
+    public void putHashvalues(String key, Map<String, String> map) {
         opsForHash().putAll(key, map);
     }
 

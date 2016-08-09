@@ -1,8 +1,9 @@
-package com.hqvoyage.platform.admin.web.security.shiro.session;
+package com.hqvoyage.platform.admin.web.security.session;
 
 import com.google.common.collect.Sets;
 import com.hqvoyage.platform.admin.web.common.web.Servlets;
 import com.hqvoyage.platform.common.redis.RedisRepository;
+import com.hqvoyage.platform.common.shiro.session.SessionDAO;
 import com.hqvoyage.platform.common.utils.DateHelper;
 import com.hqvoyage.platform.common.utils.ObjectHelper;
 import com.hqvoyage.platform.common.utils.StringHelper;

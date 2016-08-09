@@ -1,4 +1,4 @@
-package com.hqvoyage.platform.admin.web.security.shiro.session;
+package com.hqvoyage.platform.common.shiro.session;
 
 import com.hqvoyage.platform.common.utils.StringHelper;
 import org.apache.shiro.session.InvalidSessionException;

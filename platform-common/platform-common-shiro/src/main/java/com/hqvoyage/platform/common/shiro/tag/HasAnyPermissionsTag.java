@@ -1,4 +1,4 @@
-package com.hqvoyage.platform.admin.web.security.shiro;
+package com.hqvoyage.platform.common.shiro.tag;
 
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.tags.PermissionTag;

@@ -1,4 +1,4 @@
-package com.hqvoyage.platform.admin.web.security.shiro.util;
+package com.hqvoyage.platform.common.shiro.util;
 
 import com.hqvoyage.platform.common.utils.RandomHelper;
 import org.apache.shiro.session.Session;

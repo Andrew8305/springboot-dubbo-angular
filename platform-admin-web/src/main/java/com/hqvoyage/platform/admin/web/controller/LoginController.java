@@ -4,17 +4,16 @@ import com.hqvoyage.platform.admin.web.common.base.property.Global;
 import com.hqvoyage.platform.admin.web.common.web.BaseController;
 import com.hqvoyage.platform.admin.web.security.FormAuthenticationFilter;
 import com.hqvoyage.platform.admin.web.security.SystemAuthorizingRealm;
-import com.hqvoyage.platform.admin.web.security.shiro.session.SessionDAO;
 import com.hqvoyage.platform.admin.web.servlet.ValidateCodeServlet;
-import com.hqvoyage.platform.admin.web.utils.UserUtils;
+import com.hqvoyage.platform.admin.web.utils.WebUtils;
 import com.hqvoyage.platform.common.redis.RedisRepository;
+import com.hqvoyage.platform.common.shiro.session.SessionDAO;
 import com.hqvoyage.platform.common.utils.CookieUtils;
 import com.hqvoyage.platform.common.utils.NumberHelper;
 import com.hqvoyage.platform.common.utils.RandomHelper;
 import com.hqvoyage.platform.common.utils.StringHelper;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +42,7 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
-        SystemAuthorizingRealm.Principal principal = UserUtils.getPrincipal();
+        SystemAuthorizingRealm.Principal principal = WebUtils.getPrincipal();
 
         if (logger.isDebugEnabled()) {
             logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
@@ -66,7 +65,7 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginFail(HttpServletRequest request, HttpServletResponse response, Model model) {
-        SystemAuthorizingRealm.Principal principal = UserUtils.getPrincipal();
+        SystemAuthorizingRealm.Principal principal = WebUtils.getPrincipal();
 
         // 如果已经登录，则跳转到管理首页
         if (principal != null) {
@@ -109,7 +108,7 @@ public class LoginController extends BaseController {
     @RequiresPermissions("user")
     @RequestMapping(value = "/")
     public String index(HttpServletRequest request, HttpServletResponse response) {
-        SystemAuthorizingRealm.Principal principal = UserUtils.getPrincipal();
+        SystemAuthorizingRealm.Principal principal = WebUtils.getPrincipal();
 
         if (principal == null) {
             return "redirect:/login";
@@ -128,7 +127,7 @@ public class LoginController extends BaseController {
             if (StringHelper.isBlank(logined) || "false".equals(logined)) {
                 CookieUtils.setCookie(response, "LOGINED", "true");
             } else if (StringHelper.equals(logined, "true")) {
-                UserUtils.getSubject().logout();
+                WebUtils.getSubject().logout();
                 return "redirect:/login";
             }
         }

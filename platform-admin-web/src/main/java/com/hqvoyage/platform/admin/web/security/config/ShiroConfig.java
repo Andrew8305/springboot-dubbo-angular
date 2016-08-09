@@ -1,13 +1,12 @@
-package com.hqvoyage.platform.admin.web.security.shiro.config;
+package com.hqvoyage.platform.admin.web.security.config;
 
 import com.hqvoyage.platform.admin.web.common.base.property.Global;
 import com.hqvoyage.platform.admin.web.security.FormAuthenticationFilter;
 import com.hqvoyage.platform.admin.web.security.SystemAuthorizingRealm;
-import com.hqvoyage.platform.admin.web.security.shiro.session.CacheSessionDAO;
-import com.hqvoyage.platform.admin.web.security.shiro.session.RedisSessionDAO;
-import com.hqvoyage.platform.admin.web.security.shiro.session.SessionDAO;
-import com.hqvoyage.platform.admin.web.security.shiro.session.SessionManager;
-import com.hqvoyage.platform.admin.web.security.shiro.util.IdGen;
+import com.hqvoyage.platform.admin.web.security.session.RedisSessionDAO;
+import com.hqvoyage.platform.common.shiro.session.SessionDAO;
+import com.hqvoyage.platform.common.shiro.session.SessionManager;
+import com.hqvoyage.platform.common.shiro.util.IdGen;
 import com.hqvoyage.platform.common.utils.NumberHelper;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -98,7 +97,6 @@ public class ShiroConfig {
 
     @Bean
     public SessionDAO sessionDAO(EhCacheManager shiroCacheManager) {
-//        CacheSessionDAO sessionDAO = new CacheSessionDAO();
         RedisSessionDAO sessionDAO = new RedisSessionDAO();
         sessionDAO.setSessionIdGenerator(new IdGen());
         sessionDAO.setActiveSessionsCacheName("activeSessionsCache");
@@ -140,5 +138,4 @@ public class ShiroConfig {
         aasa.setSecurityManager(securityManager);
         return new AuthorizationAttributeSourceAdvisor();
     }
-
 }

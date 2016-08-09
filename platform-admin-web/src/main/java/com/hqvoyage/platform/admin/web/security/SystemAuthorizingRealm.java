@@ -1,12 +1,13 @@
 package com.hqvoyage.platform.admin.web.security;
 
-import com.hqvoyage.platform.admin.web.common.web.Servlets;
 import com.hqvoyage.platform.admin.web.common.base.property.Global;
+import com.hqvoyage.platform.admin.web.common.web.Servlets;
 import com.hqvoyage.platform.admin.web.controller.LoginController;
-import com.hqvoyage.platform.admin.web.security.shiro.session.SessionDAO;
 import com.hqvoyage.platform.admin.web.servlet.ValidateCodeServlet;
 import com.hqvoyage.platform.admin.web.utils.UserUtils;
+import com.hqvoyage.platform.admin.web.utils.WebUtils;
 import com.hqvoyage.platform.common.redis.RedisRepository;
+import com.hqvoyage.platform.common.shiro.session.SessionDAO;
 import com.hqvoyage.platform.common.utils.*;
 import com.hqvoyage.platform.system.api.entity.SysMenu;
 import com.hqvoyage.platform.system.api.entity.SysUser;
@@ -31,8 +32,6 @@ import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-
-import static com.hqvoyage.platform.admin.web.controller.LoginController.LOGIN_FAIL_MAP;
 
 /**
  * 系统安全认证实现类
@@ -63,7 +62,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 
         // 校验登录验证码
         if (isValidateCodeLogin(token.getUsername())) {
-            Session session = UserUtils.getSession();
+            Session session = WebUtils.getSession();
             String code = (String) (session != null ? session.getAttribute(ValidateCodeServlet.VALIDATE_CODE) : "");
             if (token.getCaptcha() == null || !token.getCaptcha().toUpperCase().equals(code)) {
                 throw new AuthenticationException("msg:验证码错误, 请重试.");
@@ -103,17 +102,17 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
         }
         // 获取当前已登录的用户
         if (!Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))) {
-            Collection<Session> sessions = sessionDAO.getActiveSessions(true, principal, UserUtils.getSession());
+            Collection<Session> sessions = sessionDAO.getActiveSessions(true, principal, WebUtils.getSession());
             if (sessions.size() > 0) {
                 // 如果是登录进来的，则踢出已在线用户
-                if (UserUtils.getSubject().isAuthenticated()) {
+                if (WebUtils.getSubject().isAuthenticated()) {
                     for (Session session : sessions) {
                         sessionDAO.delete(session);
                     }
                 }
                 // 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
                 else {
-                    UserUtils.getSubject().logout();
+                    WebUtils.getSubject().logout();
                     throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
                 }
             }
@@ -227,7 +226,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
          */
         public String getSessionid() {
             try {
-                Session session = UserUtils.getSession();
+                Session session = WebUtils.getSession();
                 if (session != null) {
                     return (String) session.getId();
                 }

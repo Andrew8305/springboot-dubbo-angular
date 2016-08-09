@@ -3,7 +3,6 @@ package com.hqvoyage.platform.admin.web.common.config;
 import com.hqvoyage.platform.admin.web.utils.upload.FileManager;
 import com.hqvoyage.platform.common.upload.FileOperatorOssImpl;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * Created by zhangxd on 16/7/14.
  */
 @Configuration
-@EnableConfigurationProperties
 @ConfigurationProperties("upload")
 public class UploadConfig {
 

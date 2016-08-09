@@ -1,4 +1,4 @@
-package com.hqvoyage.platform.admin.web.security.shiro.session;
+package com.hqvoyage.platform.common.shiro.session;
 
 import org.apache.shiro.session.Session;
 

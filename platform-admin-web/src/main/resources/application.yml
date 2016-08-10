@@ -18,9 +18,6 @@ spring:
       max-wait: -1 #最大等待时间
       min-idle: 0 #初始化连接数
 
-server:
-  port: 8081
-
 multipart:
   enabled: true # Enable support of multi-part uploads.
   file-size-threshold: 4KB # Threshold after which files will be written to disk. Values can use the suffixed "MB" or "KB" to indicate a Megabyte or Kilobyte size.

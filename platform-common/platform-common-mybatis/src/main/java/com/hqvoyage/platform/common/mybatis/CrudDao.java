@@ -1,4 +1,4 @@
-package com.hqvoyage.platform.system.provider.common.dao;
+package com.hqvoyage.platform.common.mybatis;
 
 import java.util.List;
 

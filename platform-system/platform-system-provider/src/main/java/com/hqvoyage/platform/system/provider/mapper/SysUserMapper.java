@@ -1,8 +1,8 @@
 package com.hqvoyage.platform.system.provider.mapper;
 
 
+import com.hqvoyage.platform.common.mybatis.CrudDao;
 import com.hqvoyage.platform.system.api.entity.SysUser;
-import com.hqvoyage.platform.system.provider.common.dao.CrudDao;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

@@ -17,6 +17,7 @@
         <module>platform-common-upload</module>
         <module>platform-common-redis</module>
         <module>platform-common-shiro</module>
+        <module>platform-common-mybatis</module>
     </modules>
 
 </project>

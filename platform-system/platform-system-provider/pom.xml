@@ -27,30 +27,17 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.hqvoyage</groupId>
+            <artifactId>platform-common-mybatis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
-
-        <!-- MySQL Driver -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
         </dependency>
 
         <dependency>

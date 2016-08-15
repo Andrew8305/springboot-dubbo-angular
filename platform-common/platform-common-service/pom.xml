@@ -9,9 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>platform-common-mybatis</artifactId>
+    <artifactId>platform-common-service</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.hqvoyage</groupId>
+            <artifactId>platform-common-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- MySQL Driver -->
         <dependency>
             <groupId>mysql</groupId>

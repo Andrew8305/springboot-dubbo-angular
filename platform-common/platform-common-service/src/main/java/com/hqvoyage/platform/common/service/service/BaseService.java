@@ -1,4 +1,4 @@
-package com.hqvoyage.platform.system.provider.common.service;
+package com.hqvoyage.platform.common.service.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

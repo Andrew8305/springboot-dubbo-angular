@@ -1,4 +1,4 @@
-package com.hqvoyage.platform.common.mybatis;
+package com.hqvoyage.platform.common.service.dao;
 
 /**
  * DAO支持类实现

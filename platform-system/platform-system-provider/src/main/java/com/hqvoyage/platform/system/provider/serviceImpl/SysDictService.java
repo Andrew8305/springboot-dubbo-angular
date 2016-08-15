@@ -2,9 +2,9 @@ package com.hqvoyage.platform.system.provider.serviceImpl;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.hqvoyage.platform.common.service.service.CrudService;
 import com.hqvoyage.platform.system.api.entity.SysDict;
 import com.hqvoyage.platform.system.api.service.ISysDictService;
-import com.hqvoyage.platform.system.provider.common.service.CrudService;
 import com.hqvoyage.platform.system.provider.mapper.SysDictMapper;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

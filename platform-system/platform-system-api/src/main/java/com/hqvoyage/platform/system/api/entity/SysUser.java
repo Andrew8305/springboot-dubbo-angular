@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import com.hqvoyage.platform.common.utils.Collections3;
-import com.hqvoyage.platform.system.api.entity.base.DataEntity;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
@@ -15,7 +14,7 @@ import java.util.List;
  * 用户Entity
  * Created by zhangxd on 15/10/20.
  */
-public class SysUser extends DataEntity<SysUser> {
+public class SysUser extends SysEntity<SysUser> {
 
     private static final long serialVersionUID = 1L;
     private String loginName;// 登录名

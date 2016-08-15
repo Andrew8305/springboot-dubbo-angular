@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>com.hqvoyage</groupId>
-            <artifactId>platform-common-mybatis</artifactId>
+            <artifactId>platform-common-service</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

@@ -1,10 +1,10 @@
-package com.hqvoyage.platform.system.provider.common.service;
+package com.hqvoyage.platform.common.service.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.SqlUtil;
-import com.hqvoyage.platform.common.mybatis.CrudDao;
-import com.hqvoyage.platform.system.api.entity.base.DataEntity;
+import com.hqvoyage.platform.common.api.DataEntity;
+import com.hqvoyage.platform.common.service.dao.CrudDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 

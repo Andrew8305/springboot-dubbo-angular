@@ -1,17 +1,17 @@
-package com.hqvoyage.platform.system.api.entity.base;
+package com.hqvoyage.platform.system.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hqvoyage.platform.common.utils.RandomHelper;
+import com.hqvoyage.platform.common.api.DataEntity;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
 
 /**
- * 数据Entity类
+ * 系统Entity基类
  * Created by zhangxd on 15/10/20.
  */
-public abstract class DataEntity<T> extends BaseEntity<T> {
+public abstract class SysEntity<T> extends DataEntity<T> {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,12 +20,12 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
     protected Date updateDate;    // 更新日期
     protected String delFlag;    // 删除标记(0:正常;1:删除;)
 
-    public DataEntity() {
+    public SysEntity() {
         super();
         this.delFlag = DEL_FLAG_NORMAL;
     }
 
-    public DataEntity(String id) {
+    public SysEntity(String id) {
         super(id);
     }
 
@@ -34,10 +34,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
      */
     @Override
     public void preInsert() {
-        // 不限制ID为UUID，调用setIsNewRecord()使用自定义ID
-        if (!this.isNewRecord) {
-            setId(RandomHelper.uuid());
-        }
+        super.preInsert();
         this.updateDate = new Date();
         this.createDate = this.updateDate;
     }

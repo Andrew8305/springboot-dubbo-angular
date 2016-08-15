@@ -1,4 +1,4 @@
-package com.hqvoyage.platform.system.api.entity.base;
+package com.hqvoyage.platform.common.api;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

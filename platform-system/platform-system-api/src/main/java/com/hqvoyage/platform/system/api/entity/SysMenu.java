@@ -2,7 +2,6 @@ package com.hqvoyage.platform.system.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hqvoyage.platform.system.api.entity.base.DataEntity;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
@@ -12,7 +11,7 @@ import java.util.List;
  * 菜单Entity
  * Created by zhangxd on 15/10/20.
  */
-public class SysMenu extends DataEntity<SysMenu> {
+public class SysMenu extends SysEntity<SysMenu> {
 
     private static final long serialVersionUID = 1L;
     private SysMenu parent;    // 父级菜单

@@ -1,4 +1,4 @@
-package com.hqvoyage.platform.system.provider.common.config;
+package com.hqvoyage.platform.system.provider.config;
 
 import com.hqvoyage.platform.common.redis.RedisRepository;
 import org.springframework.context.annotation.Bean;

@@ -2,7 +2,6 @@ package com.hqvoyage.platform.system.api.entity;
 
 import com.google.common.collect.Lists;
 import com.hqvoyage.platform.common.utils.StringHelper;
-import com.hqvoyage.platform.system.api.entity.base.DataEntity;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
  * 角色Entity
  * Created by zhangxd on 15/10/20.
  */
-public class SysRole extends DataEntity<SysRole> {
+public class SysRole extends SysEntity<SysRole> {
 
     private static final long serialVersionUID = 1L;
     private String name;    // 角色名称

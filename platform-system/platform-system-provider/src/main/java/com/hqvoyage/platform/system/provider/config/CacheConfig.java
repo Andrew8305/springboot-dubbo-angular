@@ -1,4 +1,4 @@
-package com.hqvoyage.platform.system.provider.common.config;
+package com.hqvoyage.platform.system.provider.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -14,8 +14,6 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-
-import java.lang.reflect.Method;
 
 /**
  * 缓存配置

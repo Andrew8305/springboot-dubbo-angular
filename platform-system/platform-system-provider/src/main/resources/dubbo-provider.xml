@@ -9,7 +9,8 @@
 
     <dubbo:protocol name="dubbo"/>
 
-    <dubbo:monitor protocol="registry" />
+    <!-- dubbo监控 -->
+    <!--<dubbo:monitor protocol="registry" />-->
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.hqvoyage.platform.system.api.service.ISystemService"

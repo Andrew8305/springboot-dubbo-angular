@@ -7,7 +7,8 @@
     <!-- dubbo注解扫描包名 -->
     <!--<dubbo:annotation package="com.hqvoyage.platform.admin.web"/>-->
 
-    <dubbo:monitor protocol="registry" />
+    <!-- dubbo监控 -->
+    <!--<dubbo:monitor protocol="registry" />-->
 
     <dubbo:reference interface="com.hqvoyage.platform.system.api.service.ISysDictService" id="sysDictService" />
     <dubbo:reference interface="com.hqvoyage.platform.system.api.service.ISystemService" id="systemService" />

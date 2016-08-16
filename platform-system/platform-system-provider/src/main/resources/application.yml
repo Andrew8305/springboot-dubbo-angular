@@ -11,19 +11,19 @@ spring:
     url: jdbc:mysql://localhost:3306/dev?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
     username: root
     password: root
-    # 使用druid数据源
-    type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    max-active: 20
-    initial-size: 1
-    min-idle: 3
-    max-wait: 60000
-    time-between-eviction-runs-millis: 60000
-    min-evictable-idle-time-millis: 300000
-    validation-query: SELECT 'x' FROM DUAL
-    test-while-idle: true
-    test-on-borrow: false
-    test-on-return: false
+    # 使用druid数据源
+    druid:
+      max-active: 20
+      initial-size: 1
+      min-idle: 3
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x' FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
   redis:
     database: 0
     host: 127.0.0.1

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqvoyage.platform.business.provider.mapper.SysRoleMapper">
+
+    <sql id="roleColumns">
+    	a.id,
+    	a.name,
+		a.description,
+		a.enabled
+    </sql>
+
+    <select id="findListByUserId" resultType="SysRole">
+        SELECT
+          <include refid="roleColumns"/>
+        FROM sys_role a
+        LEFT JOIN sys_user_role ur ON ur.role_id = a.id
+        WHERE a.enabled = '1'
+        AND ur.user_id = #{userId}
+        ORDER BY a.name
+    </select>
+
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- dubbo注解扫描包名 -->
+    <!--<dubbo:annotation package="com.hqvoyage.platform.business.web"/>-->
+
+    <!-- dubbo监控 -->
+    <!--<dubbo:monitor protocol="registry" />-->
+
+    <dubbo:reference interface="com.hqvoyage.platform.business.api.service.ISystemService" id="systemService" />
+</beans>

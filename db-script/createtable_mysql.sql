@@ -81,3 +81,33 @@ CREATE TABLE `sys_user_role` (
   `role_id` VARCHAR(36) NOT NULL COMMENT '角色编号',
   PRIMARY KEY (`user_id`,`role_id`)
 ) COMMENT='用户-角色';
+
+
+
+
+CREATE TABLE `sys_user` (
+  `id` VARCHAR(36) NOT NULL COMMENT '编号',
+  `login_name` VARCHAR(100) NOT NULL COMMENT '登录名',
+  `password` VARCHAR(100) NOT NULL COMMENT '密码',
+  `name` VARCHAR(100) NOT NULL COMMENT '姓名',
+  `email` VARCHAR(200) COMMENT '邮箱',
+  `phone` VARCHAR(200) COMMENT '电话',
+  `mobile` VARCHAR(200) COMMENT '手机',
+  `enabled` CHAR(1) COMMENT '是否可登录',
+  `password_reset_date` DATE NOT NULL COMMENT '密码重置时间',
+  PRIMARY KEY (`id`)
+) COMMENT='用户表';
+
+CREATE TABLE `sys_role` (
+  `id` VARCHAR(36) NOT NULL COMMENT '编号',
+  `name` VARCHAR(100) NOT NULL COMMENT '角色名称',
+  `description` VARCHAR(255) COMMENT '角色描述',
+  `enabled` CHAR(1) COMMENT '是否可登录',
+  PRIMARY KEY (`id`)
+) COMMENT='角色表';
+
+CREATE TABLE `sys_user_role` (
+  `user_id` VARCHAR(36) NOT NULL COMMENT '用户编号',
+  `role_id` VARCHAR(36) NOT NULL COMMENT '角色编号',
+  PRIMARY KEY (`user_id`,`role_id`)
+) COMMENT='用户-角色';

@@ -1,7 +1,7 @@
 logging:
   level:
     ROOT: INFO
-    com.hqvoyage.platform: DEBUG
+    me.zhangxudong.platform: DEBUG
 
 spring:
   application:
@@ -39,4 +39,4 @@ spring:
 mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mybatis/*.xml
-  type-aliases-package: com.hqvoyage.platform.business.api.entity
+  type-aliases-package: me.zhangxudong.platform.business.api.entity

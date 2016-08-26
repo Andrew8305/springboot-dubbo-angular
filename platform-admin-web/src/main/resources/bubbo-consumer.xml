@@ -5,11 +5,11 @@
 		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- dubbo注解扫描包名 -->
-    <!--<dubbo:annotation package="com.hqvoyage.platform.admin.web"/>-->
+    <!--<dubbo:annotation package="me.zhangxudong.platform.admin.web"/>-->
 
     <!-- dubbo监控 -->
     <!--<dubbo:monitor protocol="registry" />-->
 
-    <dubbo:reference interface="com.hqvoyage.platform.system.api.service.ISysDictService" id="sysDictService" />
-    <dubbo:reference interface="com.hqvoyage.platform.system.api.service.ISystemService" id="systemService" />
+    <dubbo:reference interface="me.zhangxudong.platform.system.api.service.ISysDictService" id="sysDictService" />
+    <dubbo:reference interface="me.zhangxudong.platform.system.api.service.ISystemService" id="systemService" />
 </beans>

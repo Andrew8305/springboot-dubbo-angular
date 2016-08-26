@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>platform-parent</artifactId>
-        <groupId>com.hqvoyage</groupId>
+        <groupId>me.zhangxudong</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,17 +13,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.hqvoyage</groupId>
+            <groupId>me.zhangxudong</groupId>
             <artifactId>platform-business-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.hqvoyage</groupId>
+            <groupId>me.zhangxudong</groupId>
             <artifactId>platform-common-upload</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.hqvoyage</groupId>
+            <groupId>me.zhangxudong</groupId>
             <artifactId>platform-common-redis</artifactId>
             <version>${project.version}</version>
         </dependency>

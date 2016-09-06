@@ -26,9 +26,4 @@ public class ResourceController {
         model.put("content", "Hello World");
         return model;
     }
-
-    @GetMapping("/")
-    public String hello() {
-        return "Hello";
-    }
 }

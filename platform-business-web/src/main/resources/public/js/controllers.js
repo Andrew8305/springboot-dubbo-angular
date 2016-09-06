@@ -13,7 +13,7 @@ function MainCtrl($scope, $state) {
     this.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.';
 
     $scope.$on('$stateChangeStart', function(scope, next, current) {
-        debugger
+        console.log("stateChangeStart");
         $state.go('login');
     });
 }

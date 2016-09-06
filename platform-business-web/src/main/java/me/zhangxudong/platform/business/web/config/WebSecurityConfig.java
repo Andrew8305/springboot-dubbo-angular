@@ -55,7 +55,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers(
+                        "/",
+                        "/css/**",
+                        "/font-awesome/**",
+                        "/fonts/**",
+                        "/img/**",
+                        "/js/**",
+                        "/vendor/**",
+                        "/views/**",
+                        "/auth/**"
+                ).permitAll()
                 .anyRequest().authenticated();
 
         // Custom JWT based security filter

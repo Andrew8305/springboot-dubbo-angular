@@ -1,5 +1,6 @@
 package me.zhangxudong.platform.business.web.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ public class PersonRestService {
         persons.add(new Person("Foo", "Bar"));
     }
 
+    @PreAuthorize("hasPermission()")
     @RequestMapping(path = "/persons", method = RequestMethod.GET)
     public static List<Person> getPersons() {
         return persons;
